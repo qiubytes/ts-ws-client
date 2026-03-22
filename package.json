@@ -1,0 +1,11 @@
+{
+  "name": "ColyseusClientDemo01",
+  "uuid": "5161daef-354d-42e8-a9ca-f75154054503",
+  "creator": {
+    "version": "3.8.7"
+  },
+  "dependencies": {
+    "colyseus.js": "^0.16.22",
+    "socket.io-client": "^4.8.3"
+  }
+}
