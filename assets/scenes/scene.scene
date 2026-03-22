@@ -824,7 +824,7 @@
         "__id__": 19
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 87
@@ -949,7 +949,7 @@
         "__id__": 34
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 43
@@ -1869,7 +1869,7 @@
         "__id__": 64
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 72
