@@ -1,4 +1,5 @@
 import { _decorator, Component, Game, instantiate, Label, Layout, Node, Prefab } from 'cc';
+import { RoomItem } from './RoomItem';
 
 //import Colyseus from 'db://colyseus-sdk/colyseus.js';
 const { ccclass, property } = _decorator;
@@ -11,7 +12,7 @@ export class GameManager extends Component {
 
     //websocket 客户端对象
     private ws: WebSocket | null = null;
-    private roomId = "test_room";
+    //private roomId = "test_room";
 
     //计数
     @property(Label)
@@ -33,10 +34,10 @@ export class GameManager extends Component {
         this.ws.onopen = () => {
             console.log("WebSocket 连接已打开");
             // 发送加入房间消息
-            this.ws!.send(JSON.stringify({
-                type: "join",
-                roomId: this.roomId
-            }));
+            // this.ws!.send(JSON.stringify({
+            //     type: "join",
+            //     roomId: this.roomId
+            // }));
         };
 
 
@@ -58,9 +59,16 @@ export class GameManager extends Component {
                 // this.countLabel.string = `计数: ${data.count}`;
             }
             if (data.type == "listroomdata" && this.roomLayout) {
+                if (data.data.length <= 0) return;
+                let children: Node[] = this.roomLayout.node.children;
+                children.forEach(x => {
+                    x.destroy();
+                });
                 let roomItem = instantiate(this.roomItemPrefab);
                 roomItem.getChildByName("RoomLabel").getComponent(Label).string = data.data[0].roomId;
                 roomItem.setParent(this.roomLayout.node);
+                let rt: RoomItem = roomItem.getComponent(RoomItem);
+                rt.setRoomId(data.data[0].roomId);
             }
         };
 
@@ -72,6 +80,15 @@ export class GameManager extends Component {
     //房间管理相关
     public getRoomList() {
         this.ws.send(JSON.stringify({ type: "list" }));
+    }
+    //加入或创建房间
+    public joinOrCreateRoom(roomId: string) {
+        if (roomId == "") return;
+
+        this.ws!.send(JSON.stringify({
+            type: "join",
+            roomId: roomId
+        }));
     }
 }
 
