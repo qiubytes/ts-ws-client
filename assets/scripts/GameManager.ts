@@ -103,6 +103,12 @@ export class GameManager extends Component {
                 let MyNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/MyPlayer/NameLabel");
                 MyNameLabel.getComponent(Label).string = data.data.clientid;
             }
+            //房间状态改变 比如开始游戏
+            if (data.type == "RoomStateChanged") {
+                if (data.roomState == "Play") {
+                    this.roomPanel.active = false;
+                }
+            }
         };
 
 
@@ -130,6 +136,10 @@ export class GameManager extends Component {
     //准备游戏
     public gameReady() {
         this.ws.send(JSON.stringify({ type: "changeRoomClientState", roomClientState: 'Ready' }));
+    }
+    //递增 测试
+    public inc() {
+        this.ws.send(JSON.stringify({ type: "inc" }));
     }
 }
 
