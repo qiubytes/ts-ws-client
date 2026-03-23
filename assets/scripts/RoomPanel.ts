@@ -17,7 +17,7 @@ export class RoomPanel extends Component {
         if (this.lastUpdateTime > 3) {
             GameManager.inst.getRoomList();
             this.lastUpdateTime = 0;
-        }
+        } 
 
     }
     //创建/加入房间
@@ -27,6 +27,7 @@ export class RoomPanel extends Component {
         }
         //GameManager.inst.getRoomList();
     }
+    
 }
 
 

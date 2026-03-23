@@ -61,6 +61,7 @@ export class GameManager extends Component {
                 this.countLabel.string = data.count;
                 // this.countLabel.string = `计数: ${data.count}`;
             }
+            //获取房间列表数据
             if (data.type == "listroomdata" && this.roomLayout) {
                 if (data.data.length <= 0) return;
                 let children: Node[] = this.roomLayout.node.children;
@@ -73,6 +74,7 @@ export class GameManager extends Component {
                 let rt: RoomItem = roomItem.getComponent(RoomItem);
                 rt.setRoomId(data.data[0].roomId);
             }
+            //我已加入房间
             if (data.type == "roomJoined" && this.roomPanel) {
                 let topPanel: Node = this.roomPanel.getChildByName("TopPanel");
                 let roomsScrollView: Node = this.roomPanel.getChildByName("RoomsScrollView");
@@ -80,6 +82,11 @@ export class GameManager extends Component {
                 topPanel.active = false;
                 roomsScrollView.active = false;
                 roomDetail.active = true;
+            }
+            //其他玩家加入我的房间
+            if (data.type == "roomOtherJoined") {
+                let targetNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/TargetPlayer/NameLabel");
+                targetNameLabel.getComponent(Label).string = data.clientid;
             }
         };
 

@@ -1,4 +1,5 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Label, Node } from 'cc';
+import { GameManager } from './GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('RoomItem')
@@ -17,6 +18,12 @@ export class RoomItem extends Component {
 
     update(deltaTime: number) {
 
+    }
+    //加入房间
+    public joinRoom() {
+        let roomLabel: Node = this.node.getChildByName("RoomLabel");
+        let roomId: string = roomLabel.getComponent(Label).string;
+        GameManager.inst.joinOrCreateRoom(roomId);
     }
 }
 
