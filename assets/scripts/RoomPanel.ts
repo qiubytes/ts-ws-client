@@ -16,7 +16,8 @@ export class RoomPanel extends Component {
         this.lastUpdateTime += deltaTime;
         if (this.lastUpdateTime > 3) {
             GameManager.inst.getRoomList();
-            this.lastUpdateTime = 0;
+            GameManager.inst.getMyRoomInfo();
+            this.lastUpdateTime = 0; 
         } 
 
     }

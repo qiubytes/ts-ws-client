@@ -88,6 +88,21 @@ export class GameManager extends Component {
                 let targetNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/TargetPlayer/NameLabel");
                 targetNameLabel.getComponent(Label).string = data.clientid;
             }
+            //房间内信息（客户端）
+            if (data.type == "MyRoomInfo") {
+                let targetPlayerName: string = "";
+                for (let i: number = 0; i < data.data.clients.length; i++) {
+                    if (data.data.clients[i] != data.data.clientid) {
+                        targetPlayerName = data.data.clients[i];
+                        break;
+                    }
+                }
+                console.log(targetPlayerName)
+                let targetNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/TargetPlayer/NameLabel");
+                targetNameLabel.getComponent(Label).string = targetPlayerName;
+                let MyNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/MyPlayer/NameLabel");
+                MyNameLabel.getComponent(Label).string = data.data.clientid;
+            }
         };
 
 
@@ -107,6 +122,10 @@ export class GameManager extends Component {
             type: "join",
             roomId: roomId
         }));
+    }
+    //获取我的房间信息
+    public getMyRoomInfo() {
+        this.ws.send(JSON.stringify({ type: "getMyRoomInfo" }));
     }
 }
 
