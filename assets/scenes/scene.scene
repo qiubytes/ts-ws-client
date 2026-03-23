@@ -2129,7 +2129,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -310,
+      "x": -360,
       "y": 230.8,
       "z": 0
     },
@@ -2173,7 +2173,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_id": "e8wgHJRTtLm7EtuksL2Bhy"
@@ -2398,7 +2398,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -310,
+      "x": -360,
       "y": 0,
       "z": 0
     },
@@ -2442,7 +2442,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_id": "8b2Z1F1XRBU4GFzb7hR46r"
