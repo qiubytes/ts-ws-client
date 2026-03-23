@@ -127,6 +127,10 @@ export class GameManager extends Component {
     public getMyRoomInfo() {
         this.ws.send(JSON.stringify({ type: "getMyRoomInfo" }));
     }
+    //准备游戏
+    public gameReady() {
+        this.ws.send(JSON.stringify({ type: "changeRoomClientState", roomClientState: 'Ready' }));
+    }
 }
 
 
