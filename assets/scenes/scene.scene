@@ -613,6 +613,9 @@
       "__uuid__": "8a295522-e154-4f1b-9688-11d4c5fd12f1",
       "__expectedType__": "cc.Prefab"
     },
+    "roomPanel": {
+      "__id__": 21
+    },
     "_id": "3fmm4ltOtBu51kSUZv7xVI"
   },
   {
@@ -1584,7 +1587,7 @@
       "b": 0,
       "a": 255
     },
-    "_string": "创建",
+    "_string": "创建/加入",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 20,

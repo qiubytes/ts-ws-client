@@ -23,6 +23,9 @@ export class GameManager extends Component {
     //房间Item预制体
     @property(Prefab)
     roomItemPrefab: Prefab;
+    //房间面板节点 用于网络控制
+    @property(Node)
+    roomPanel: Node;
     //单例对象
     public static inst: GameManager = null;
     protected onLoad(): void {
@@ -69,6 +72,14 @@ export class GameManager extends Component {
                 roomItem.setParent(this.roomLayout.node);
                 let rt: RoomItem = roomItem.getComponent(RoomItem);
                 rt.setRoomId(data.data[0].roomId);
+            }
+            if (data.type == "roomJoined" && this.roomPanel) {
+                let topPanel: Node = this.roomPanel.getChildByName("TopPanel");
+                let roomsScrollView: Node = this.roomPanel.getChildByName("RoomsScrollView");
+                let roomDetail: Node = this.roomPanel.getChildByName("RoomDetail");
+                topPanel.active = false;
+                roomsScrollView.active = false;
+                roomDetail.active = true;
             }
         };
 
