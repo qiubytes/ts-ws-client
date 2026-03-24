@@ -26,6 +26,15 @@ export class GameManager extends Component {
     //房间面板节点 用于网络控制
     @property(Node)
     roomPanel: Node;
+    //对战场景
+    @property(Node)
+    playPanel: Node;
+    //提示Label 对战场景
+    @property(Label)
+    tipsLabel: Label;
+    //操作面板 对战场景
+    @property(Node)
+    opPanel: Node
     //单例对象
     public static inst: GameManager = null;
     protected onLoad(): void {
@@ -106,9 +115,17 @@ export class GameManager extends Component {
             //房间状态改变 比如开始游戏
             if (data.type == "RoomStateChanged") {
                 if (data.roomState == "Play") {
-                    this.roomPanel.active = false;
+                    this.roomPanel.active = false;//房间UI关闭
+                    this.playPanel.active = true;//对战UI开启
                 }
             }
+            //该我出牌 
+            if (data.type == "isYouTurnToPlay") {
+                this.tipsLabel.string = "该您出牌了!";
+                this.opPanel.active = true;
+            }
+
+            //ToDo 等待对方出牌
         };
 
 
@@ -140,6 +157,11 @@ export class GameManager extends Component {
     //递增 测试
     public inc() {
         this.ws.send(JSON.stringify({ type: "inc" }));
+    }
+    //出牌
+    public playACard(playingData: string) {
+        this.ws.send(JSON.stringify({ type: "playingData", playingData: playingData }));
+
     }
 }
 
