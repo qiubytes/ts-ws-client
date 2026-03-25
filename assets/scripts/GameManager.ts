@@ -81,11 +81,14 @@ export class GameManager extends Component {
                 children.forEach(x => {
                     x.destroy();
                 });
-                let roomItem = instantiate(this.roomItemPrefab);
-                roomItem.getChildByName("RoomLabel").getComponent(Label).string = data.data[0].roomId;
-                roomItem.setParent(this.roomLayout.node);
-                let rt: RoomItem = roomItem.getComponent(RoomItem);
-                rt.setRoomId(data.data[0].roomId);
+                data.data.forEach(x => {
+                    let roomItem = instantiate(this.roomItemPrefab);
+                    roomItem.getChildByName("RoomLabel").getComponent(Label).string = x.roomId;
+                    roomItem.setParent(this.roomLayout.node);
+                    let rt: RoomItem = roomItem.getComponent(RoomItem);
+                    rt.setRoomId(data.data[0].roomId);
+                });
+
             }
             //我已加入房间
             if (data.type == "roomJoined" && this.roomPanel) {
