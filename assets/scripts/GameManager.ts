@@ -37,6 +37,10 @@ export class GameManager extends Component {
     opPanel: Node
     //单例对象
     public static inst: GameManager = null;
+
+    //当前客户端ID (ToDo登录后赋值)
+    public currentClientId: string = "";
+
     protected onLoad(): void {
         if (GameManager.inst == null) GameManager.inst = this;
     }
@@ -111,6 +115,7 @@ export class GameManager extends Component {
                 targetNameLabel.getComponent(Label).string = targetPlayerName;
                 let MyNameLabel: Node = this.roomPanel.getChildByPath("RoomDetail/MyPlayer/NameLabel");
                 MyNameLabel.getComponent(Label).string = data.data.clientid;
+                this.currentClientId = data.data.clientid;
             }
             //房间状态改变 比如开始游戏
             if (data.type == "RoomStateChanged") {
@@ -123,6 +128,26 @@ export class GameManager extends Component {
             if (data.type == "isYouTurnToPlay") {
                 this.tipsLabel.string = "该您出牌了!";
                 this.opPanel.active = true;
+            }
+            //该我等待
+            if (data.type == "isYouWaitPlay") {
+                this.tipsLabel.string = "等待对方出牌...";
+                this.opPanel.active = false;
+            }
+            //本轮结果
+            if (data.type == "roundResult") {
+                // console.log('roundResult');
+                if (data.result == "draw") {
+                    this.tipsLabel.string = "平局";
+                    this.opPanel.active = false;
+                }
+                else if (data.result == this.currentClientId) {
+                    this.tipsLabel.string = "我方胜";
+                    this.opPanel.active = false;
+                } else {
+                    this.tipsLabel.string = "我方失败，对方胜";
+                    this.opPanel.active = false;
+                }
             }
 
             //ToDo 等待对方出牌
