@@ -35,6 +35,12 @@ export class GameManager extends Component {
     //操作面板 对战场景
     @property(Node)
     opPanel: Node
+    //我的分数
+    @property(Label)
+    myscoreLabel: Label;
+    //对方分数
+    @property(Label)
+    opponentscoreLabel: Label;
     //单例对象
     public static inst: GameManager = null;
 
@@ -151,6 +157,11 @@ export class GameManager extends Component {
                     this.tipsLabel.string = "我方失败，对方胜";
                     this.opPanel.active = false;
                 }
+                //赋值对战分数
+                let myscore: string = data.mysocre;
+                let opponentscore: string = data.opponentscore;
+                this.myscoreLabel.string = myscore;
+                this.opponentscoreLabel.string = opponentscore;
             }
 
             //ToDo 等待对方出牌
